@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FELICIUCA — main.js
+   ELEN'S COFFEE — main.js
    --------------------------------------------------------------------------
    Vanilla JS, no build step. Handles:
      1. Navigation scroll state + mobile toggle
