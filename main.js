@@ -116,4 +116,49 @@
       sections.forEach(s => io.observe(s));
     }
   }
+
+  /* ---------- 6. Nutrition modal (menu page) --------------------------- */
+  const nutriModal = $('#nutriModal');
+  if (nutriModal) {
+    const titleEl = $('#nutriModalTitle', nutriModal);
+    const units = { kcal: 'kcal', fat: 'g', satfat: 'g', carbs: 'g', sugars: 'g', protein: 'g', salt: 'g' };
+    let lastTrigger = null;
+
+    const fill = (btn) => {
+      titleEl.textContent = btn.dataset.name || '';
+      Object.keys(units).forEach((key) => {
+        const dd = nutriModal.querySelector(`[data-fact="${key}"]`);
+        if (!dd) return;
+        const raw = (btn.dataset[key] || '').trim();
+        dd.textContent = (!raw || raw === '—') ? '—' : `${raw} ${units[key]}`;
+      });
+    };
+
+    const openModal = (btn) => {
+      lastTrigger = btn;
+      fill(btn);
+      nutriModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => nutriModal.classList.add('is-open'));
+      const closeBtn = $('.nutri-modal__close', nutriModal);
+      if (closeBtn) closeBtn.focus();
+    };
+
+    const closeModal = () => {
+      nutriModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+      window.setTimeout(() => { nutriModal.hidden = true; }, 260);
+      if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
+    };
+
+    $$('[data-nutri]').forEach((btn) => {
+      btn.addEventListener('click', () => openModal(btn));
+    });
+    $$('[data-nutri-close]', nutriModal).forEach((el) => {
+      el.addEventListener('click', closeModal);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !nutriModal.hidden) closeModal();
+    });
+  }
 })();
