@@ -253,6 +253,15 @@ h1, h2, h3, h4 {
   font-weight: 500;
   letter-spacing: -0.01em;
 }
+/* shop name beside the logo — the site's display face (Fraunces) */
+.nav__name {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  white-space: nowrap;
+}
 .nav__mark {
   display: inline-block;
   width: 44px;
@@ -1334,51 +1343,19 @@ html.js [data-reveal].is-visible {
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 2.4rem; }
   .menu-list { grid-template-columns: 1fr; }
 
-  .nav__cta { display: none; }
-  .nav__toggle { display: flex; }
-  .nav__links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    gap: 0;
-    padding: 0.4rem var(--gutter) 1.6rem;
-    background: var(--c-cream);
-    box-shadow: var(--shadow-md);
-    border-top: 1px solid var(--c-line);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-12px);
-    transition: opacity 0.35s ease,
-                transform 0.4s var(--ease-out-soft),
-                visibility 0s linear 0.4s;
-  }
-  .nav.is-open .nav__links {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    transition: opacity 0.35s ease,
-                transform 0.4s var(--ease-out-soft),
-                visibility 0s linear 0s;
-  }
-  .nav__link {
-    width: 100%;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--c-line);
-    font-size: 1.1rem;
-  }
-  .nav__link::after { display: none; }
-
-  .nav.is-open .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav.is-open .nav__toggle span:nth-child(2) { opacity: 0; }
-  .nav.is-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  /* navigation stays inline at every width — the collapsed/hamburger menu is gone */
+  .nav__inner { gap: 1rem; }
+  .nav__links { gap: 1.25rem; }
 
   .hero__meta { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
   .hero__stat-num { font-size: 1.3rem; }
 }
 
 @media (max-width: 600px) {
+  /* brand name stays visible next to the logo; tighten gaps so it fits on one row */
+  .nav__name { font-size: 1.1rem; }
+  .nav__inner { gap: 0.6rem; }
+
   .features__grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; }
